@@ -1,7 +1,7 @@
     <!-- ::::::  Start  Footer ::::::  -->
-    <footer class="footer m-t-100">
+    <footer class="footer m-t-100"> <span style="display: none">Git Test</span>
         <div class="container">
-            <!-- Start Footer Top Section --> 
+            <!-- Start Footer Top Section -->  
             <div class="footer__top">
                 <div class="row">
                     <div class="col-lg-5 col-md-5">
