@@ -1,5 +1,5 @@
     <!-- ::::::  Start  Footer ::::::  -->
-    <footer class="footer m-t-100"> <span style="display: none">Git Test</span>
+    <footer class="footer m-t-100"> <span style="display: none">Git Test direct update</span>
         <div class="container">
             <!-- Start Footer Top Section -->  
             <div class="footer__top">
