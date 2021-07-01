@@ -2,7 +2,7 @@
 ```
     "require": {
         ...
-        "tulparstudyo/sw-frigian": "^1.0"
+        "swordbros/sw-frigian": "^1.0"
     }
 
 ```
