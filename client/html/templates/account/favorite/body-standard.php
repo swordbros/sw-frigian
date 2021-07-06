@@ -36,7 +36,7 @@ $favTarget = $this->config( 'client/html/account/favorite/url/target' );
  * @category Developer
  * @see client/html/account/favorite/url/target
  * @see client/html/account/favorite/url/action
- * @see client/html/account/favorite/url/config
+ * @see client/html/account/favorite/url/config 
  */
 $favController = $this->config( 'client/html/account/favorite/url/controller', 'account' );
 
