@@ -16,7 +16,7 @@ $enc = $this->encoder();
  * * unlimited
  * * high
  * * low
- * * out
+ * * out 
  *
  * If no stock information is available, the number of products is considered
  * unlimited, which is useful for digital products. Zero or less products in
@@ -39,7 +39,7 @@ $enc = $this->encoder();
 $stockLow = $this->config( 'client/html/catalog/stock/level/low', 5 );
 
 /// Stock string composition with stock type (%1$s, normally left out) and stock level string (%2$s)
-$textStockIn = $this->translate( 'client', 'Stock: %1$s, %2$s' );
+$textStockIn = $this->translate( 'client', '%2$s' );
 /// Stock string composition with stock type (%1$s, normally left out), stock level string (%2$s) and back in stock date (%3$s)
 $textStockOut = $this->translate( 'client', 'Stock: %1$s, %2$s, back on %3$s' );
 $dateFormat = $this->translate( 'client', 'Y-m-d' );
@@ -77,6 +77,7 @@ foreach( $this->get( 'stockProductCodes', [] ) as $prodCode )
 		}
 
 		$stocklevel = $item->getStockLevel();
+	
 
 		if( $stocklevel === null ) {
 			$level = 'stock-unlimited'; $link = 'http://schema.org/InStock';

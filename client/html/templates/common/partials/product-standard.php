@@ -1,4 +1,10 @@
 <?php
+
+$favorite_product=frigian_favorite_products();
+$watch_product=frigian_watch_products();
+
+//dd($favoriler);
+
 $enc = $this->encoder();
 $position = $this->get( 'position' );
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
@@ -24,12 +30,17 @@ $favController = $this->config( 'client/html/account/favorite/url/controller', '
 $favAction = $this->config( 'client/html/account/favorite/url/action', 'favorite' );
 $favConfig = $this->config( 'client/html/account/favorite/url/config', [] );
 $productItem = $this->get('product');
+//print_r($productItem->getId());
+
 //print_r( get_class_methods($productItem));
 $price= $productItem->getRefItems( 'price', null, 'default' );
 //dd($price->getValue()->first()); 
 if($productItem ){
 	$params = array_diff_key( ['d_name' => $productItem->getName( 'url' ), 'd_prodid' => $productItem->getId(), 'd_pos' => $position !== null ? $position++ : ''], $detailFilter ); 
 ?>
+
+
+
 <!-- Start Single Default Product -->
 <?php if($price->getValue()->first() > 0 ) :?>
     <div class="col-md-4 col-12"> 
@@ -81,7 +92,7 @@ if($productItem ){
 				    	<input type="hidden"
 				    		name="<?= $enc->attr( $this->formparam( ['b_prod', 0, 'prodid'] ) ); ?>"
 				    		value="<?= $enc->attr( $productItem->getId() ); ?>"
-				    	/>   
+				    	/>
         
                         <div class="quantity-scale ">
                                             
@@ -105,20 +116,46 @@ if($productItem ){
                 <?php endif; ?>			
             </form> 
         </li>
+        <?php $params_fav = ['fav_action' => 'delete', 'fav_id' => $productItem->getId()] + $this->get( 'favoriteParams', [] ); ?>
+    	<?php $params_watch = ['wat_action' => 'delete', 'wat_id' => $productItem->getId()] + $this->get( 'watchParams', [] ); ?>
+						
     <?php 
 	$icons = array('pin'=>'fa-map-pin','watch'=>'fa-eye','favorite'=>'fa-heart');
 	 foreach( $this->config( 'client/html/catalog/actions/list', [ 'pin', 'favorite', 'watch'] ) as $entry ) : ?>
 		<?php if( isset( $urls[$entry] ) ) : ?>
-			<li class="<?= $entry ?>"><a class="btn btn--round btn--round-size-small btn--green btn--green-hover-black" href="<?= $enc->attr( $urls[$entry] );  ?> " title="<?= $enc->attr( $this->translate( 'client/code', $entry ) ); ?>" data-toggle="tooltip" target="_blank" title="" data-original-title="<?= $enc->attr( $entry ); ?>">
-                   <i class="fa <?= @$icons[$enc->attr( $entry )]; ?>"></i>
+            <li class="<?= $entry?>">
+            <?php 
+            $fav_class = '';
+            foreach( $favorite_product as $listItem ) {
+                $fav_id=$listItem->getRefId(); 
+                 if($entry == "favorite" && $fav_id == $productItem->getId() ) {
+                    $fav_class = 'fav-added';
+                } 
+            }?>
+
+            <?php 
+            $watch_class = '';
+            foreach( $watch_product as $listItem ) {
+                $watch_id=$listItem->getRefId(); 
+                 if($entry == "watch" && $watch_id == $productItem->getId() ) {
+                    $fav_class = 'watch-added';
+                } 
+            }?>
+               
+
+                <a  href="<?= $enc->attr( $urls[$entry] );  ?> " class="<?=$fav_class?> <?=$watch_class?> btn btn--round btn--round-size-small btn--green btn--green-hover-black" data-add="<?= $enc->attr( $urls[$entry] );  ?> " data-remove="<?= $enc->attr( $this->url( $favTarget, $favController, $favAction, $params_fav, [], $favConfig ) ); ?> " 
+                data-remove-watch="<?= $this->url( $watchTarget, $watchController, $watchAction, $params_watch, [], $watchConfig ); ?> " 
+                title="<?= $enc->attr( $this->translate( 'client/code', $entry ) ); ?>" data-toggle="tooltip" target="_blank" title="" 
+                data-original-title="<?= $enc->attr( $entry ); ?>">   
+                    <i class="fa <?= @$icons[$enc->attr( $entry )]; ?>"></i>
                 </a>
-			</li>
+            </li>        
 		<?php endif; ?>
 	  <?php endforeach; ?>
-     
     </ul>
     <!-- End Product Action Link --> 
   </div>
+
    
   
   <!-- Start Product Content -->

@@ -1,6 +1,12 @@
 <?php
 $nav = $this->get('nav', []);
 ?>
+<?php if (frigian_option('css_code')) { ?>
+    <style>
+        <?php echo frigian_option('css_code')?>
+    </style>
+<?php } ?>
+
 <!--  Start Large Header Section   -->
 <div class="header d-none d-lg-block">
             <!-- Start Header Top area -->
@@ -23,7 +29,7 @@ $nav = $this->get('nav', []);
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 			<!-- Start Header Top area -->
 
             <!-- Start Header Center area -->
@@ -49,11 +55,11 @@ $nav = $this->get('nav', []);
                             <ul class="header__user-action-icon">
                             <!-- Start Header Wishlist Box -->
                             <?php if (Auth::guest()){ ?>
-                                <li class="nav-item"><a href="<?=route('login')?>"><i class="icon-users"></i></a></li>
+                                <li class="nav-item"><a  href="<?=route('login')?>"><i class="far fa-user"></i><a class="login-text" href="<?=route('login')?>" style="font-size:18px;margin-left:4px"><?=$this->translate('client', 'Войти')?></a> </a></li>
                             <?php } else { ?>
                                 <li class="nav-item dropdown">
                                     <!--<a  title="<?= get_username() ?>"><small style="font-size:10px;"><?= get_username() ?></small></a>-->
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding: 0px" href="<?=route('login')?>"><i class="icon-users"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding: 0px" href="<?=route('login')?>"><i class="fas fa-user"></i></i></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a class="nav-link" href="<?= route('aimeos_shop_account') ?>" title="<?=$this->translate('client', 'Profile')?>"><?=$this->translate('client', 'Profile')?></a></li>
                                         <li><form id="logout" action="/logout" method="POST"><?= csrf_field()?></form><a class="nav-link" href="javascript: document.getElementById('logout').submit();"><?=$this->translate('client', 'Logout')?></a></li>
@@ -64,18 +70,18 @@ $nav = $this->get('nav', []);
 
                             <!-- Start Header Add Cart Box -->
                                 <li>
- 
+
                                 <div class="aimeos">
 
                                     <a href="#offcanvas-add-cart__box" class="offcanvas-toggle basket-mini-main" >
                                         <i class="icon-shopping-cart"></i>
                                         <span class="wishlist-item-count pos-absolute-main quantity">0</span>
                                     </a>
-                                    
+
                                 </div>
-                                  
+
                                 </li> <!-- End Header Add Cart Box -->
-                            </ul> 
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -86,7 +92,7 @@ $nav = $this->get('nav', []);
                     <div class="row justify-content-between align-items-center">
                         <div class="">
                             <div class="header-menu-vertical pos-relative">
-                               
+
                             <?=$this->partial( $this->config( 'client/html/common/partials/category_nav', 'common/partials/category_nav-standard' ),
                                         array(
                                             'nav' => $nav,
@@ -96,16 +102,16 @@ $nav = $this->get('nav', []);
 
                             </div>
                         </div>
-                       
+
                         <?php /* <div class="col-xl-2 col-lg-3" style="padding-left: 0; padding-right: 0;">
                             <div class="header-phone text-right"><span><?= $this->translate( 'client', 'Call Us:' ); echo frigian_option('store_phone');?> </span></div>
                         </div> */ ?>
                     </div>
                 </div>
-            </div> 
+            </div>
 			<!-- End Header bottom area -->
 
-        </div> 
+        </div>
 <!--  End Large Header Section  -->
 
 
@@ -125,14 +131,14 @@ $nav = $this->get('nav', []);
                             </li>
                         </ul>
                         <!-- Start User Action -->
-                        <ul class="header__mobile--rightside header__user-action-icon  d-flex align-items-center justify-content-end"> 
+                        <ul class="header__mobile--rightside header__user-action-icon  d-flex align-items-center justify-content-end">
                             <!-- Start Header Add Cart Box -->
                             <?php if (Auth::guest()){ ?>
-                                <li class="nav-item"><a href="<?=route('login')?>"><i class="icon-users"></i></a></li>
+                                <li class="nav-item"><a href="<?=route('login')?>"><i class="far fa-user"></i></a></li>
                             <?php } else { ?>
                                 <li class="nav-item dropdown">
                                     <!--<a  title="<?= get_username() ?>"><small style="font-size:10px;"><?= get_username() ?></small></a>-->
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding: 0px" href="<?=route('login')?>"><i class="icon-users"></i></a>
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding: 0px" href="<?=route('login')?>"><i class="fas fa-user"></i></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a class="nav-link" href="<?= route('aimeos_shop_account') ?>" title="<?=$this->translate('client', 'Profile')?>"><?=$this->translate('client', 'Profile')?></a></li>
                                         <li><form id="logout" action="/logout" method="POST"><?= csrf_field()?></form><a class="nav-link" href="javascript: document.getElementById('logout').submit();"><?=$this->translate('client', 'Logout')?></a></li>
@@ -150,7 +156,7 @@ $nav = $this->get('nav', []);
                             <li><a href="#offcanvas-mobile-menu" class="offcanvas-toggle"><i class="far fa-bars"></i></a></li>
 
                         </ul>   <!-- End User Action -->
-                        
+
                     </div>
                     <div class="col-xl-7 col-lg-6">
                         <?=$this->partial( $this->config( 'client/html/common/partials/search-mini', 'catalog/filter/search-body-mini' ),
@@ -164,17 +170,17 @@ $nav = $this->get('nav', []);
                 <?php /* <div class="row">
                     <div class="col-12">
                         <div class="header-menu-vertical pos-relative m-t-30">
-                            
+
 <?php /*$this->partial( $this->config( 'client/html/common/partials/category_nav', 'common/partials/category_nav-standard' ),
 			array(
 				'nav' => $nav,
 			)
-		); 
+		);
                         </div>
                     </div> */?>
                 </div>
             </div>
-        </div> 
+        </div>
 <!--  Start Mobile Header Section   -->
 
 <?=$this->partial( $this->config( 'client/html/common/partials/desktop_nav', 'common/partials/desktop_nav-standard' ),
@@ -182,5 +188,4 @@ $nav = $this->get('nav', []);
 				'nav' => $nav,
 			)
 		);?>
-                                   
-   
+

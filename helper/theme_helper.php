@@ -1,4 +1,6 @@
+
 <?php
+
 if(!function_exists('frigian_url')){
 	function frigian_url($file=''){
 		return '/'.rtrim(config('shop.client.html.common.baseurl', 'packages/swordbros/shop/themes/frigian'), '/').'/'.ltrim($file, '/');	
@@ -34,6 +36,11 @@ if(!function_exists('frigian_catalog_filter')){
 		return \Aimeos\Shop\Facades\Shop::get('catalog/filter')->getBody();
 	}
 }
+if(!function_exists('frigian_catalog_session')){
+	function frigian_catalog_session(){
+		return \Aimeos\Shop\Facades\Shop::get('catalog/session')->getBody();
+	}
+}
 if(!function_exists('frigian_catalog_list_types')){
     function frigian_catalog_list_types(){
         $rows = \DB::table('mshop_catalog_list_type')
@@ -48,7 +55,7 @@ if(!function_exists('frigian_catalog_list_types')){
 }
 if(!function_exists('frigian_top_products')){
 	function frigian_top_products(){
-
+ 
 
 		$ctx = \Aimeos\Shop\Facades\Shop::get('swordbros/frigian/widget')->getContext();
 		$manager = \Aimeos\MShop::create( $ctx, 'order/base/product' );
@@ -73,6 +80,7 @@ if(!function_exists('frigian_top_products')){
 
 	}
 }
+
 if(!function_exists('frigian_new_products')){
 	function frigian_new_products(){
 		$ctx = \Aimeos\Shop\Facades\Shop::get('swordbros/frigian/widget')->getContext();
@@ -81,6 +89,40 @@ if(!function_exists('frigian_new_products')){
 			->search();
 
 		return($products);
+	}
+}
+
+if(!function_exists('frigian_favorite_products')){
+
+	function frigian_favorite_products(){
+		$context = \Aimeos\Shop\Facades\Shop::get('swordbros/frigian/widget')->getContext();
+	
+		$domains = $context->getConfig()->get( 'client/html/account/favorite/domains', ['text', 'price', 'media'] );
+		$domains['product'] = ['favorite'];
+
+		$cntl = \Aimeos\Controller\Frontend::create( $context, 'customer' );
+		$listItems = $cntl->uses( $domains )->get()->getListItems( 'product', 'favorite' );
+		
+	
+		
+
+		return $listItems;
+
+	}
+}
+if(!function_exists('frigian_watch_products')){
+
+	function frigian_watch_products(){
+		$context = \Aimeos\Shop\Facades\Shop::get('swordbros/frigian/widget')->getContext();
+	
+		$domains = $context->getConfig()->get( 'client/html/account/watch/domains', ['text', 'price', 'media'] );
+		$domains['product'] = ['watch'];
+
+		$cntl = \Aimeos\Controller\Frontend::create( $context, 'customer' );
+		$listItems = $cntl->uses( $domains )->get()->getListItems( 'product', 'watch' );
+		
+		return $listItems;
+
 	}
 }
 
@@ -155,3 +197,19 @@ if(!function_exists('frigian_admin_bar')){
 	}
 }
 
+if(!function_exists('frigian_deleteFavorites')){
+	function frigian_deleteFavorites($ids){
+		
+		$cntl = \Aimeos\Controller\Frontend::create(  \Aimeos\Shop\Facades\Shop::get('swordbros/frigian/widget')->getContext(), 'customer' );
+	
+		$item = $cntl->uses( ['product' => ['favorite']] )->get();
+		
+			if( ( $listItem = $item->getListItem( 'product', 'favorite', $ids ) ) !== null ) {
+				$cntl->deleteListItem( 'product', $listItem );
+			}
+		
+
+		$cntl->store();
+	}
+	
+}

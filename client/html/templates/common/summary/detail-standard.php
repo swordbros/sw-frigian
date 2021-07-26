@@ -237,45 +237,33 @@ $errors = $this->get( 'summaryErrorCodes', [] );
 
 				<td class="quantity">
 
+				<div class="quantity">
+
 					<?php if( $modify && ( $product->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) == 0 ) : ?>
 
-						
-						<input class="value" type="text"
-							name="<?= $enc->attr( $this->formparam( array( 'b_prod', $position, 'quantity' ) ) ); ?>"
-							value="<?= $enc->attr( $product->getQuantity() ); ?>" maxlength="10" required="required"
-						/>
-						<input type="hidden" type="text"
-							name="<?= $enc->attr( $this->formparam( array( 'b_prod', $position, 'position' ) ) ); ?>"
-							value="<?= $enc->attr( $position ); ?>"
-						/>
-
-                      
-						<div class="my-quantity-nav">
-
-						<?php $basketParams = array( 'b_action' => 'edit', 'b_position' => $position, 'b_quantity' => $product->getQuantity() + 1 ); ?>
-						<div class="my-quantity-button my-quantity-up">
-						<a class="minibutton change" href="<?= $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $basketParams, [], $basketConfig ) ); ?>">
-                        <i class="fal fa-plus"></i>
-                        </a>
-						</div>
-                        
-						<div class="my-quantity-button my-quantity-down">
-
-						<?php  if(!($product->getQuantity() == 1)) : ?>
+					<?php if( $product->getQuantity() > 1 ) : ?>
 						<?php $basketParams = array( 'b_action' => 'edit', 'b_position' => $position, 'b_quantity' => $product->getQuantity() - 1 ); ?>
-						<a class="minibutton change" href="<?= $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $basketParams, [], $basketConfig ) ); ?>">
-						
-						<?php endif;?>
-						<i class="fal fa-minus"></i>
-                        </a>
-						</div>
-
-						</div>
-
-						
+						<a class="minibutton change decrease" href="<?= $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $basketParams, [], $basketConfig ) ); ?>">−</a>
 					<?php else : ?>
-						<?= $enc->html( $product->getQuantity() ); ?>
+						<a class="minibutton change decrease" >−</a>
 					<?php endif; ?>
+
+					<input class="value" type="text"
+						name="<?= $enc->attr( $this->formparam( array( 'b_prod', $position, 'quantity' ) ) ); ?>"
+						value="<?= $enc->attr( $product->getQuantity() ); ?>" maxlength="10" required="required"
+					/>
+					<input type="hidden" type="text"
+						name="<?= $enc->attr( $this->formparam( array( 'b_prod', $position, 'position' ) ) ); ?>"
+						value="<?= $enc->attr( $position ); ?>"
+					/>
+
+					<?php $basketParams = array( 'b_action' => 'edit', 'b_position' => $position, 'b_quantity' => $product->getQuantity() + 1 ); ?>
+					<a class="minibutton change increase" href="<?= $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $basketParams, [], $basketConfig ) ); ?>">+</a>
+
+					<?php else : ?>
+					<?= $enc->html( $product->getQuantity() ); ?>
+					<?php endif; ?>
+					</div>
 				</td>
 
 

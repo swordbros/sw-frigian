@@ -31,17 +31,17 @@ $enc = $this->encoder();
 	<h1 class="header">
 		<?= $this->translate( 'client', 'Last seen' ); ?>
 		<?php if( $this->config( 'client/html/catalog/session/seen/count/enable', true ) ) : ?>
-			<span class="count"><?= count( $this->get( 'seenItems', [] ) ) ?></span>
+			<span class="count">(<?= count( $this->get( 'seenItems', [] ) ) ?>)</span>
 		<?php endif; ?>
 	</h1>
 
-	<ul class="seen-items">
+	<ul class="seen-items row">
 		<?php foreach( $this->get( 'seenItems', [] ) as $seen ) : ?>
-			<li class="seen-item">
+			<li class="seen-item col-md-4 col-12 ">
 				<?= $seen; ?>
 			</li>
 		<?php endforeach; ?>
-	</ul>
+	</ul> 
 
 </section>
 <?php $this->block()->stop(); ?>

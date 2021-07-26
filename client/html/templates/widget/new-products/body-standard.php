@@ -1,11 +1,14 @@
 <?php
 $enc = $this->encoder();
+
 $products = frigian_new_products();
 $ctx = \Aimeos\Shop\Facades\Shop::get('swordbros/frigian/widget')->getContext();
 $tree = \Aimeos\Controller\Frontend::create( $ctx, 'catalog' )->uses( ['media', 'price', 'text'] )->sort('-ctime')
 ->getTree( \Aimeos\Controller\Frontend\Catalog\Iface::LIST );
+
 ?>
 <!-- ::::::  Start  Product Style - Default Section  ::::::  -->
+
 <div class="product m-t-30">
   <div class="container">
     <div class="row">
@@ -17,10 +20,11 @@ $tree = \Aimeos\Controller\Frontend::create( $ctx, 'catalog' )->uses( ['media', 
         <!-- End Section Title --> 
       </div> 
     </div>
+
     <div class="row">
       <div class="col-12">
         <div class="default-slider default-slider--hover-bg-red product-default-slider">
-          <div class="product-default-slider-4grid-1rows gap__col--30 gap__row--40"> 
+          <div class="product-default-slider-4grid-1rows gap__col--30 gap__row--40 row">
           <?php foreach($products  as $product ){ 
               echo $this->partial( $this->config( 'client/html/common/partials/product', 'common/partials/product-standard' ),
                 array(

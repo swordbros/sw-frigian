@@ -57,7 +57,8 @@ $optConfig = $this->config( 'client/jsonapi/url/config', [] );
           
 			<?= $this->block()->get( 'catalog/filter/supplier' ); ?>
 			<?= $this->block()->get( 'catalog/filter/attribute' ); ?>
-		
+			<?= $this->block()->get( 'catalog/session/pinned' ); ?>
+			<?= $this->block()->get( 'catalog/session/seen' ); ?>
 
 		</form>
 	</nav>

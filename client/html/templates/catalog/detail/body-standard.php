@@ -95,7 +95,7 @@ $reqstock = (int) $this->config( 'client/html/basket/require-stock', true );
                             <?= str_repeat( '<li class="product__review--fill"><i class="fa fa-star"></i></li>', (int) round( $this->detailProductItem->getRating() )) ?>
                             </div>
                         </ul>
-					<?php endif ?>
+					<?php endif ?> 
 
 
                     <div class="price-list product__price">
@@ -623,7 +623,7 @@ $reqstock = (int) $this->config( 'client/html/basket/require-stock', true );
         <!-- End Product Details Tab -->
 
         <!-- ::::::  Start  Product Style - Default Section  ::::::  -->
-        <div class="product m-t-100">
+        <div class="product m-t-100 related">
             <div class="container">
             <?php if( !( $products = $this->detailProductItem->getRefItems( 'product', null, 'suggestion' ) )->isEmpty() ) : ?>
 
@@ -675,7 +675,7 @@ $reqstock = (int) $this->config( 'client/html/basket/require-stock', true );
                         </div>  <!-- End Section Title -->
                     </div>
                 </div>
-                <div class="row">
+                <div class="row bought-together">
                     <div class="col-12">
                         <div class="default-slider default-slider--hover-bg-red product-default-slider">
                             <div class="product-default-slider-4grid-1rows gap__col--30 gap__row--40">

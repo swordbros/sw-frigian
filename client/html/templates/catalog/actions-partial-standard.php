@@ -12,6 +12,8 @@
 
 $enc = $this->encoder();
 
+$favorite_product=frigian_favorite_products();
+$watch_product=frigian_watch_products();
 
 $pinTarget = $this->config( 'client/html/catalog/session/pinned/url/target' );
 $pinController = $this->config( 'client/html/catalog/session/pinned/url/controller', 'catalog' );
@@ -56,17 +58,41 @@ $urls = array(
 $icons = array('pin'=>'fa-map-pin','watch'=>'fa-eye','favorite'=>'fa-heart');
 ?>
 
-
+<?php $params_fav = ['fav_action' => 'delete', 'fav_id' =>$this->productItem->getId()] + $this->get( 'favoriteParams', [] ); ?>
+<?php $params_watch = ['wat_action' => 'delete', 'wat_id' => $this->productItem->getId()] + $this->get( 'watchParams', [] ); ?>
+		
 <div class="catalog-actions">
 	<?php foreach( $this->config( 'client/html/catalog/actions/list', ['pin', 'watch', 'favorite'] ) as $entry ) : ?>
 		
 		<?php if( isset( $urls[$entry] ) ) : ?>
-		
-			<a class="actions-button actions-button-<?= $enc->attr( $entry ); ?>" href="<?= $enc->attr( $urls[$entry] ); ?>" title="<?= $enc->attr( $this->translate( 'client/code', $entry ) ); ?>">
+            <?php 
+            $fav_class = '';
+            foreach( $favorite_product as $listItem ) {
+                $fav_id=$listItem->getRefId(); 
+                 if($entry == "favorite" && $fav_id == $this->productItem->getId() ) {
+                    $fav_class = 'fav-added';
+                } 
+            }?>
+            <?php 
+            $watch_class = '';
+            foreach( $watch_product as $listItem ) {
+                $watch_id=$listItem->getRefId(); 
+                 if($entry == "watch" && $watch_id == $this->productItem->getId() ) {
+                    $fav_class = 'watch-added';
+                } 
+            }?>
+			<a class="actions-button <?=$fav_class?> <?=$watch_class?> actions-button-<?= $enc->attr( $entry ) ?> " 
+            data-add="<?= $enc->attr( $urls[$entry] );  ?> " data-remove="<?= $enc->attr( $this->url( $favTarget, $favController, $favAction, $params_fav, [], $favConfig ) ); ?> " 
+            data-remove-watch="<?= $this->url( $watchTarget, $watchController, $watchAction, $params_watch, [], $watchConfig ); ?> " 
+            href="<?= $enc->attr( $urls[$entry] ); ?>" title="<?= $enc->attr( $this->translate( 'client/code', $entry ) ); ?>">
             <i  style ="width: 40px; height:40px;padding-top: 10px;"data-toggle="tooltip" data-placement="top" title="<?= $enc->attr( $this->translate( 'client/code', $entry ) ); ?>"  class="fa <?= @$icons[$enc->attr( $entry )]; ?> "></i></a>
-		<?php endif; ?>
+
+	
+			<?php endif; ?>
 	<?php endforeach; ?>
- 
+
+	
+	
 
 </div>
 <script>

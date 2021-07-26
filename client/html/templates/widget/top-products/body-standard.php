@@ -24,7 +24,7 @@ $products = frigian_top_products();
           <!-- Start Single Tab Item -->
           <div class="tab-pane show active" id="fruits">
             <div class="default-slider default-slider--hover-bg-red product-default-slider">
-              <div class="product-default-slider-4grid-1rows gap__col--30 gap__row--40"> 
+              <div class="product-default-slider-4grid-1rows gap__col--30 gap__row--40 row">
                
               <?php foreach($products  as $product ){ 
 

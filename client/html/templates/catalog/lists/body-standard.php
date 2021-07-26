@@ -142,6 +142,7 @@ $products = $this->get( 'itemsProductItems', map() );
                    
                     <div class="sidebar">
 					<?=frigian_catalog_filter()?>
+					<?=frigian_catalog_session()?>
 					<div class="sidebar__widget">
                             <div class="row">
                                 <div class="col-12">

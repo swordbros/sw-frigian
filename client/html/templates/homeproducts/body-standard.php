@@ -39,7 +39,7 @@ $catalog_lists = $this->get( 'catalog_lists', map() );
     <div class="row">
       <div class=" home-product catalog-list col-12">
         <div class="default-slider default-slider--hover-bg-red product-default-slider">
-          <div class="product-default-slider-4grid-1rows gap__col--30 gap__row--40"> 
+          <div class="product-default-slider-4grid-1rows gap__col--30 gap__row--40 row">
 
                                 <?php foreach($catalog_list['listProductItems']  as $product ){ 
                                         echo $this->partial( $this->config( 'client/html/common/partials/product', 'common/partials/product-standard' ),

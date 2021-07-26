@@ -16,7 +16,10 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', [] );
 <div class="product-gallery-box product-gallery-box--default m-b-60">
                             <div class="product-image--large product-image--large-horizontal">
 							<?php $mediaItem = $this->get( 'mediaItems', [] )->first();
+							if($mediaItem ){
 								$imgUrl = $this->content( $mediaItem->getUrl() );
+						
+								
 				  			?>
                             <img class="img-fluid" id="img-zoom" src="<?= $imgUrl ?>" data-zoom-image="<?= $imgUrl ?>" alt="">
                             </div>
@@ -25,7 +28,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', [] );
 								<?php $previewUrl = $this->content( $mediaItem->getUrl() ); ?>
                                 <a data-image="<?= $previewUrl; ?>" data-zoom-image="<?= $previewUrl; ?>">
                                     <img class="img-fluid" src="<?= $previewUrl; ?>" alt="">
-								</a><?php endforeach; ?>
+								</a><?php endforeach; } ?>
 								
                              
                             </div>

@@ -109,7 +109,7 @@ $basketSite = $this->config( 'client/html/basket/standard/url/site' );
 		<?php endif; ?>
 	</h1>
 <?php endif; ?>
-	<ul class="pinned-items">
+	<ul class="pinned-items row">
 		<?php foreach( $this->get( 'pinnedProductItems', [] ) as $id => $productItem ) : ?>
 			<?php $pinParams = ['pin_action' => 'delete', 'pin_id' => $id] + $this->get( 'pinnedParams', [] ); ?>
 			<?php $detailParams = array_diff_key( ['d_name' => $productItem->getName( 'url' ), 'd_prodid' => $id, 'd_pos' => ''], $detailFilter ); ?>
@@ -123,7 +123,7 @@ $basketSite = $this->config( 'client/html/basket/standard/url/site' );
 						<div class="media-item"></div>
 					<?php endif; ?>
 					<h3 class="product__link"><?= $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
-					<div class="price-list">
+					<div class="price-list"> 
 						<?= $this->partial(
 							$this->config( 'client/html/common/partials/price', 'common/partials/price-standard' ),
 							array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) )
@@ -213,6 +213,14 @@ $basketSite = $this->config( 'client/html/basket/standard/url/site' );
 					<a> <?=  $productItem->getProperties( 'package-packaging' )->first();?> </a>
 				</td>
 				</tr>					
+				<?php } ?>
+				<?php if ( $productItem->getProperties( 'package-kg' )->first()){ ?>
+				<tr class="compare-data" style="display: table-row;">
+				<td class="compare-data-header"  ><?= $this->translate( 'client', 'Cost per kg' ); ?> </td>
+				<td class="compare-data-text">
+					<a> <?=  $productItem->getProperties( 'package-kg' )->first();?> </a>
+				</td>
+				</tr>
 				<?php } ?>
 
 				<?php if ( $productItem->getProperties( 'package-storage-temperature' )->first()){ ?>

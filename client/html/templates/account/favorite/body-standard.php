@@ -36,7 +36,7 @@ $favTarget = $this->config( 'client/html/account/favorite/url/target' );
  * @category Developer
  * @see client/html/account/favorite/url/target
  * @see client/html/account/favorite/url/action
- * @see client/html/account/favorite/url/config 
+ * @see client/html/account/favorite/url/config
  */
 $favController = $this->config( 'client/html/account/favorite/url/controller', 'account' );
 
@@ -97,7 +97,6 @@ $basketConfig = $this->config( 'client/html/basket/standard/url/config', [] );
 $basketSite = $this->config( 'client/html/basket/standard/url/site' );
 
 
-
 ?>
 <section class="aimeos account-favorite account-wrapper" data-jsonurl="<?= $enc->attr( $this->url( $optTarget, $optCntl, $optAction, [], [], $optConfig ) ); ?>">
 
@@ -122,7 +121,7 @@ $basketSite = $this->config( 'client/html/basket/standard/url/site' );
 				<?php if( ( $productItem = $listItem->getRefItem() ) !== null ) : ?>
 
 					<li class="favorite-item product__box">
-						<?php $params = ['fav_action' => 'delete', 'fav_id' => $listItem->getRefId()] + $this->get( 'favoriteParams', [] ); ?>
+						<?php $params = ['fav_action' => 'delete', 'fav_id' => $listItem->getRefId()] + $this->get( 'favoriteParams', [] );?>
 						<a class="modify" href="<?= $enc->attr( $this->url( $favTarget, $favController, $favAction, $params, [], $favConfig ) ); ?>">
 						<i class="fa fa-trash"></i>
 						</a>
@@ -136,8 +135,6 @@ $basketSite = $this->config( 'client/html/basket/standard/url/site' );
 							<?php else : ?>
 								<div class="media-item"></div>
 							<?php endif; ?>
-
-							
 
 							<h3 class="product__link"><?= $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
 							<div class="price-list">

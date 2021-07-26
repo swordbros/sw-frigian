@@ -25,7 +25,7 @@ $fname = 'ca_' . $this->get( 'type', 'billing' ) . ( $this->get( 'id' ) ? '_' : 
 
 			<?php foreach( $this->get( 'salutations', [] ) as $salutation ) : ?>
 				<option value="<?= $enc->attr( $salutation ); ?>" <?= $this->value( 'address', 'order.base.address.salutation' ) == $salutation ? 'selected' : '' ?> >
-					<?= $enc->html( $this->translate( 'mshop/code', $salutation ) ); ?>
+					<?= $enc->html( $this->translate( 'client', $salutation ) ); ?>
 				</option>
 			<?php endforeach; ?>
 

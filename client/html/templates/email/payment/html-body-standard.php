@@ -446,7 +446,7 @@ $enc = $this->encoder();
                                                                                                                     <a href="#" target="_blank">
                                                                                                                         <?php if( ( $url = $product->getMediaUrl() ) != '' ) : ?>
 
-                                                                                                                        <img class="detail" src="<?= $enc->attr( $this->content( $url ) ); ?>" />
+                                                                                                                        <img class="detail" style="width:200px;" src="<?= $enc->attr( $this->content( $url ) ); ?>" />
 
                                                                                                                         <?php endif; ?>
 

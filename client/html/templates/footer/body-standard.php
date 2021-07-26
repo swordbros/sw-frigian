@@ -1,12 +1,12 @@
     <!-- ::::::  Start  Footer ::::::  -->
     <footer class="footer m-t-100"> <span style="display: none">Git Test direct update</span>
         <div class="container">
-            <!-- Start Footer Top Section -->  
+            <!-- Start Footer Top Section -->
             <div class="footer__top">
                 <div class="row">
                     <div class="col-lg-5 col-md-5">
                         <div class="footer__about">
-                            <div class="footer__logo"> 
+                            <div class="footer__logo">
                                 <a href="index.html" class="footer__logo-link">
                                     <img src="<?=frigian_url('assets/img/iconekol/logo_0.png')?>" alt="" class="footer__logo-img">
                                 </a>
@@ -16,7 +16,7 @@
                                 <?php echo frigian_option('store_address')?></li>
                                 <li class="footer__address-item"><i class="fa fa-phone-alt"></i>
                                 <?php echo frigian_option('store_phone')?></li>
-                                <li class="footer__address-item"><i class="fa fa-envelope"></i>  
+                                <li class="footer__address-item"><i class="fa fa-envelope"></i>
                                 <?php echo frigian_option('store_email')?></li>
                             </ul>
                             <ul class="footer__social-nav">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                        <!-- Start Footer Nav -->  
+                        <!-- Start Footer Nav -->
                         <div class="footer__menu">
                         <?php echo frigian_option('col_1')?>
                              <!-- <h4 class="footer__nav-title footer__nav-title--dash footer__nav-title--dash-red">INFORMATION</h4>
@@ -40,30 +40,30 @@
                                 <li class="footer__list"><a href="" class="footer__link">Orders & Returns</a></li>
                                 <li class="footer__list"><a href="" class="footer__link">Deliveries</a></li>
                                 <li class="footer__list"><a href="" class="footer__link"> Refund & Returns</a></li>
-                            </ul>--> 
-                        </div> <!-- End Footer Nav --> 
+                            </ul>-->
+                        </div> <!-- End Footer Nav -->
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-6 col-12">
                         <div class="footer__menu">
                         <?php echo frigian_option('col_2')?>
-                            
+
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-12">
                         <div class="footer__menu">
                         <?php echo frigian_option('col_3')?>
-                          
+
                         </div>
                     </div>
                     <!-- <div class="col-lg-2 col-md-3 col-sm-6 col-12">
                         <div class="footer__menu">
                         <?php echo frigian_option('col_4')?>
-                            
+
                         </div>
                     </div> -->
                 </div>
             </div> <!-- End Footer Top Section -->
-            <!-- Start Footer Bottom Section --> 
+            <!-- Start Footer Bottom Section -->
             <div class="footer__bottom">
                 <div class="row">
                     <div class="col-lg-8 col-md-6 col-12">
@@ -76,12 +76,11 @@
                          <!-- Start Footer Payment Logo -->
                         <div class="footer__payment">
                             <a href="#" class="footer__payment-link">
-                                <img src="<?=frigian_url('assets/img/company-logo/payment.png')?>" alt="" class="footer__payment-img">
                             </a>
                         </div>  <!-- End Footer Payment Logo -->
                     </div>
                 </div>
-            </div> <!-- End Footer Bottom Section --> 
+            </div> <!-- End Footer Bottom Section -->
         </div>
     </footer> <!-- ::::::  End  Footer ::::::  -->
 <!-- material-scrolltop button -->
@@ -123,7 +122,7 @@
     </div>
   </div>
 </div>
-<!-- End Modal Add cart --> 
+<!-- End Modal Add cart -->
 
 <!-- Start Modal Quickview cart -->
 <div class="modal fade" id="modalQuickView" tabindex="-1" role="dialog" aria-hidden="true">
@@ -183,4 +182,9 @@
     </div>
   </div>
 </div>
-<!-- End Modal Quickview cart --> 
+    <?php if (frigian_option('js_code')) { ?>
+    <script>
+        <?php echo frigian_option('js_code')?>
+    </script>
+    <?php } ?>
+<!-- End Modal Quickview cart -->

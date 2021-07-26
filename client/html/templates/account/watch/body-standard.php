@@ -102,10 +102,10 @@ $optConfig = $this->config( 'client/jsonapi/url/config', [] );
 			<?php endforeach; ?>
 		</ul>
 	<?php endif; ?>
-
+	<h4 class="account-title"><?= $this->translate( 'client', 'Watched products' ); ?></h4>
 
 	<?php if( !$this->get( 'watchItems', map() )->isEmpty() ) : ?>
-		<h4 class="account-title"><?= $this->translate( 'client', 'Watched products' ); ?></h4>
+	
 
 		<ul class="watch-items">
 			<?php foreach( $this->get( 'watchItems', map() )->reverse() as $listItem ) : ?>
@@ -239,6 +239,18 @@ $optConfig = $this->config( 'client/jsonapi/url/config', [] );
 				</div>
 			</nav>
 		<?php endif; ?>
+		<?php else: ?>
+			<div class="account-info">
+				<p> <?php echo $enc->html( $this->translate( 'client', 'You have not added a watch product to yet.' ), $enc::TRUST ); ?> </p>
+			</div>
+	
+       
+			<div class="cont-shop">
+				<a  class=" btn--box profile-button btn--radius btn--green btn--black-hover-green btn--uppercase font--semi-bold" href="/" >
+				<?php echo $enc->html( $this->translate( 'client', 'Continue Shopping' ), $enc::TRUST ); ?> 
+
+				</a>      
+			</div>       
 
 	<?php endif; ?>
 </section>

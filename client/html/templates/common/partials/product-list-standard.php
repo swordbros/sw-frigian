@@ -1,4 +1,7 @@
 <?php
+$favorite_product=frigian_favorite_products();
+$watch_product=frigian_watch_products();
+
 $enc = $this->encoder();
 $position = $this->get( 'position' );
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
@@ -54,7 +57,7 @@ if($productItem ){
                 <li class="product__review--fill"><i class="far fa-star"></i></li>
             <?php endif ?> 
             </ul>
-            <a href="<?= $enc->attr( $this->url( ( $productItem->getTarget() ?: $detailTarget ), $detailController, $detailAction, $params, [], $detailConfig ) ); ?>" class="product__link"><h5 class="font--regular"><?=$productItem->get('product.label')?></h5></a>
+            <a href="<?= $enc->attr( $this->url( ( $productItem->getTarget() ?: $detailTarget ), $detailController, $detailAction, $params, [], $detailConfig ) ); ?>" class="product__link"><h5 class="font--regular"><?=$productItem->get('product.label', $enc::TRUST)?></h5></a>
             <?= $this->partial(
                 $this->config( 'client/html/common/partials/price', 'common/partials/price-standard' ),
                 ['prices' => $productItem->getRefItems( 'price', null, 'default' )]
@@ -128,16 +131,42 @@ if($productItem ){
                 <?php endif; ?>			
             </form> 
         </li>
-                    <?php 
-                    $icons = array('pin'=>'fa-map-pin','watch'=>'fa-eye','favorite'=>'fa-heart');
-                    foreach( $this->config( 'client/html/catalog/actions/list', [ 'pin', 'favorite', 'watch'] ) as $entry ) : ?>
-                        <?php if( isset( $urls[$entry] ) ) : ?>
-                            <li><a class="btn btn--round btn--round-size-small btn--green btn--green-hover-black" href="<?= $enc->attr( $urls[$entry] );  ?> " title="<?= $enc->attr( $this->translate( 'client/code', $entry ) ); ?>" data-toggle="tooltip" target="_blank" title="" data-original-title="<?= $enc->attr( $entry ); ?>">
-                                <i class="fa <?= @$icons[$enc->attr( $entry )]; ?>"></i>
-                                </a>
-                            </li>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+        <?php $params_fav = ['fav_action' => 'delete', 'fav_id' => $productItem->getId()] + $this->get( 'favoriteParams', [] ); ?>
+    	<?php $params_watch = ['wat_action' => 'delete', 'wat_id' => $productItem->getId()] + $this->get( 'watchParams', [] ); ?>
+						
+    <?php 
+	$icons = array('pin'=>'fa-map-pin','watch'=>'fa-eye','favorite'=>'fa-heart');
+	 foreach( $this->config( 'client/html/catalog/actions/list', [ 'pin', 'favorite', 'watch'] ) as $entry ) : ?>
+		<?php if( isset( $urls[$entry] ) ) : ?>
+            <li class="<?= $entry?>">
+            <?php 
+            $fav_class = '';
+            foreach( $favorite_product as $listItem ) {
+                $fav_id=$listItem->getRefId(); 
+                 if($entry == "favorite" && $fav_id == $productItem->getId() ) {
+                    $fav_class = 'fav-added';
+                } 
+            }?>
+
+            <?php 
+            $watch_class = '';
+            foreach( $watch_product as $listItem ) {
+                $watch_id=$listItem->getRefId(); 
+                 if($entry == "watch" && $watch_id == $productItem->getId() ) {
+                    $fav_class = 'watch-added';
+                } 
+            }?>
+               
+
+                <a  href="<?= $enc->attr( $urls[$entry] );  ?> " class="<?=$fav_class?> <?=$watch_class?> btn btn--round btn--round-size-small btn--green btn--green-hover-black" data-add="<?= $enc->attr( $urls[$entry] );  ?> " data-remove="<?= $enc->attr( $this->url( $favTarget, $favController, $favAction, $params_fav, [], $favConfig ) ); ?> " 
+                data-remove-watch="<?= $this->url( $watchTarget, $watchController, $watchAction, $params_watch, [], $watchConfig ); ?> " 
+                title="<?= $enc->attr( $this->translate( 'client/code', $entry ) ); ?>" data-toggle="tooltip" target="_blank" title="" 
+                data-original-title="<?= $enc->attr( $entry ); ?>">   
+                    <i class="fa <?= @$icons[$enc->attr( $entry )]; ?>"></i>
+                </a>
+            </li>        
+		<?php endif; ?>
+	  <?php endforeach; ?>
             
                 </ul>
             </ul>
